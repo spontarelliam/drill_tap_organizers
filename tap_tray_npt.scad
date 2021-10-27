@@ -8,9 +8,9 @@ ending_bin = 6;                // end bin number
 units = "imperial";  // "imperial" or "metric"
 invert = false;           // true flips the labels
 
-bin_width = 28;
-shortest_bin = 65;
-growth_rate = 0.027;
+bin_width = 24;
+shortest_bin = 54;
+growth_rate = 0.05;
 
 l = 2;
 w = shortest_bin;
@@ -70,15 +70,16 @@ for (i=[starting_bin:ending_bin-1])
             }
         }
         else {
-            difference() {
+
                 translate([-1+i*bin_width,-shortest_bin/2-10,-h/2])
                 cube([bin_width+2, 10,h]);
 
                 translate([bin_width/2 + i*bin_width, -shortest_bin/2-5, h/2 - 4])
+                color("red")
                 linear_extrude(height = 5) {
                     text(labels[i], size = 5, font = "Cantarell Extra Bold", halign = "center", valign = "center", $fn = 16);
                 }
-            }
+
         }
     }
 }
