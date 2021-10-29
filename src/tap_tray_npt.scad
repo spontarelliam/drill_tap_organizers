@@ -87,6 +87,7 @@ for (i=[starting_bin:ending_bin-1])
     }
 }
 
+// NPT Taps label on front of tray
 color("red")
 translate([0.5*(ending_bin - starting_bin)*bin_width,-shortest_bin/2-9.7,0])
 rotate([90, 0, 0])
