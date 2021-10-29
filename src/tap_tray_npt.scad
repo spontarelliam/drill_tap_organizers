@@ -22,6 +22,9 @@ h2 = h-2;
 echo("last bin height = ", w+((ending_bin)*w*2*growth_rate));
 echo("organizer width =", (ending_bin-starting_bin)*bin_width);
 
+
+difference()
+{
 for (i=[starting_bin:ending_bin-1])
 {
     difference()
@@ -82,4 +85,12 @@ for (i=[starting_bin:ending_bin-1])
 
         }
     }
+}
+
+color("red")
+translate([0.5*(ending_bin - starting_bin)*bin_width,-shortest_bin/2-9.7,0])
+rotate([90, 0, 0])
+linear_extrude(height = 1) {
+text("NPT Taps", size = 10, font = "Cantarell Extra Bold", halign = "center", valign = "center", $fn = 16);
+}
 }
