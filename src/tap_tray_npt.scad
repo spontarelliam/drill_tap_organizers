@@ -8,9 +8,9 @@ ending_bin = 6;                // end bin number
 units = "imperial";  // "imperial" or "metric"
 invert = false;           // true flips the labels
 
-bin_width = 24;
+bin_width = 28;
 shortest_bin = 54;
-growth_rate = 0.05;
+growth_rate = 0.08;
 
 l = 2;
 w = shortest_bin;
