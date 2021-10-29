@@ -45,10 +45,10 @@ for (i=[starting_bin:ending_bin-1])
         }
 
         translate([250,15,h/3-2])
-        rotate([-5, 90, 0])
+        rotate([-4, 90, 0])
         cylinder (h = 600, r=20, center = true, $fn=10);
         translate([250,15,h/3])
-        rotate([-5, 90, 0])
+        rotate([-4, 90, 0])
         cube([16,38,600], center=true);
     }
 
@@ -57,24 +57,22 @@ for (i=[starting_bin:ending_bin-1])
     {
         labels=["1/16", "5/64", "3/32", "7/64", "1/8", "9/64", "5/32", "11/64", "3/16", "13/64", "7/32", "15/64", "1/4", "17/64", "9/32", "19/64", "5/16", "21/64", "11/32", "23/64", "3/8", "25/64", "13/32", "27/64", "7/16", "29/64", "15/32", "31/64", "1/2"];
         if (invert==true) {
-            difference()
-            {
-                translate([-1+i*bin_width,-shortest_bin/2-10,-h/2])
-                cube([bin_width+2, 10,h]);
+                translate([-1+i*bin_width,-shortest_bin/2-8,-h/2])
+                cube([bin_width+2, 8,h]);
 
-                translate([bin_width/2 + i*bin_width, -shortest_bin/2-5, h/2 - 4])
+                translate([bin_width/2 + i*bin_width, -shortest_bin/2-4, h/2 - 4])
                 rotate([0,0,180])
+                color("red")
                 linear_extrude(height = 5) {
                     text(labels[i], size = 5, font = "Cantarell Extra Bold", halign = "center", valign = "center", $fn = 16);
                 }
-            }
         }
         else {
 
-            translate([-1+i*bin_width,-shortest_bin/2-10,-h/2])
-            cube([bin_width+2, 10,h]);
+            translate([-1+i*bin_width,-shortest_bin/2-8,-h/2])
+            cube([bin_width+2, 8,h]);
 
-            translate([bin_width/2 + i*bin_width, -shortest_bin/2-5, h/2 - 4])
+            translate([bin_width/2 + i*bin_width, -shortest_bin/2-4, h/2 - 4])
             color("red")
             linear_extrude(height = 5) {
                 text(labels[i], size = 5, font = "Cantarell Extra Bold", halign = "center", valign = "center", $fn = 16);
@@ -84,13 +82,14 @@ for (i=[starting_bin:ending_bin-1])
     }
     else if (units == "metric")
     {
-        labels=["1", "2"];
+        labels=["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"];
         if (invert==true) {
 
-            translate([-1+i*bin_width,-shortest_bin/2-10,-h/2])
-            cube([bin_width+2, 10,h]);
+            translate([-1+i*bin_width,-shortest_bin/2-8,-h/2])
+            cube([bin_width+2, 8,h]);
             translate([bin_width/2 + i*bin_width, -36, h/2 - 4])
             rotate([0,0,180])
+            color("red")
             linear_extrude(height = 5) {
                 text(labels[i], size = 5, font = "Cantarell Extra Bold", halign = "center", valign = "center", $fn = 16);
             }
@@ -98,7 +97,11 @@ for (i=[starting_bin:ending_bin-1])
         }
         else {
 
-            translate([bin_width/2 + i*bin_width, -36, h/2 - 4])
+            translate([-1+i*bin_width,-shortest_bin/2-8,-h/2])
+            cube([bin_width+2, 8,h]);
+
+            translate([bin_width/2 + i*bin_width, -shortest_bin/2-4, h/2 - 4])
+            color("red")
             linear_extrude(height = 5) {
                 text(labels[i], size = 5, font = "Cantarell Extra Bold", halign = "center", valign = "center", $fn = 16);
             }
