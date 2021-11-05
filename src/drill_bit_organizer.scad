@@ -4,8 +4,8 @@
 //   11/2018
 //---------------------
 starting_bin = 0;     // changes the starting size label, 0 is smallest
-ending_bin = 14;                // end bin number
-units = "metric";  // "imperial" or "metric"
+ending_bin = 10;                // end bin number
+units = "imperial";  // "imperial" or "metric"
 invert = false;           // true flips the labels
 
 bin_width = 18;

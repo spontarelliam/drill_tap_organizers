@@ -4,13 +4,13 @@
 //   10/2021
 //---------------------
 starting_bin = 0;     // changes the starting size label, 0 is smallest
-ending_bin = 20;                // end bin number
+ending_bin = 13;                // end bin number
 units = "imperial";  // "imperial" or "metric"
 
 
 bin_width = 20;
-shortest_bin = 65;
-growth_rate = 0.017;
+shortest_bin = 54;
+growth_rate = 0.02;
 
 l = 2;
 w = shortest_bin;

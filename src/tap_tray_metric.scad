@@ -4,13 +4,12 @@
 //   10/2021
 //---------------------
 starting_bin = 0;     // changes the starting size label, 0 is smallest
-ending_bin = 34;                // end bin number
-units = "imperial";  // "imperial" or "metric"
+ending_bin = 11;                // end bin number
+invert = true;
 
-
-bin_width = 20;
-shortest_bin = 65;
-growth_rate = 0.017;
+bin_width = 22;
+shortest_bin = 55;
+growth_rate = 0.02;
 
 l = 2;
 w = shortest_bin;
@@ -43,6 +42,7 @@ for (i=[starting_bin:ending_bin-1])
                 cube ([l2, w2+((i+1)*w2*2*growth_rate), h2], center=true);
             }
         }
+        
 
         translate([250,15,h/3-2])
         rotate([-5, 90, 0])
@@ -52,10 +52,22 @@ for (i=[starting_bin:ending_bin-1])
         cube([16,38,600], center=true);
     }
 
-
-    if (units == "imperial")
-    {
         labels=["M2x0.4", "M3x0.5", "M4x0.7", "M5x0.8", "M6x1.0", "M6x0.75", "M7x0.75", "M7x1.0", "M8x0.75", "M8x1.0", "M8x1.25", "M9x0.75", "M9x1.0", "M9x1.25", "M10x0.75", "M10x1.0", "M10x1.25", "M10x1.5", "M11x0.75", "M11x1.0", "M11x1.25", "M11x1.5", "M12x0.75", "M12x1.0", "M12x1.25", "M12x1.5", "M14x1.0", "M14x1.25", "M14x1.5", "M14x2.0", "M16x1.0", "M16x1.5", "M16x2.0", "M18x1.5"];
+    
+    
+            if (invert==true) {
+
+            translate([-1+i*bin_width,-shortest_bin/2-8,-h/2])
+            cube([bin_width+2, 8,h]);
+            translate([bin_width/2 + i*bin_width, -shortest_bin/2-4, h/2 - 4])
+            rotate([0,0,180])
+            color("red")
+            linear_extrude(height = 5) {
+                text(labels[i], size = 3.5, font = "Cantarell Extra Bold", halign = "center", valign = "center", $fn = 16);
+            }
+
+        }
+        else {
 
         translate([-1+i*bin_width,-shortest_bin/2-10,-h/2])
         cube([bin_width+2, 10,h]);
@@ -63,7 +75,8 @@ for (i=[starting_bin:ending_bin-1])
         translate([bin_width/2 + i*bin_width, -shortest_bin/2-5, h/2 - 4])
         color("red")
         linear_extrude(height = 5) {
-            text(labels[i], size = 3, font = "Cantarell Extra Bold", halign = "center", valign = "center", $fn = 16);
+            text(labels[i], size = 3.5, font = "Cantarell Extra Bold", halign = "center", valign = "center", $fn = 16);
         }
-    }
+        }
+    
 }
