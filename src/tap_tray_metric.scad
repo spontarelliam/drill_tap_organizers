@@ -4,7 +4,7 @@
 //   10/2021
 //---------------------
 starting_bin = 0;     // changes the starting size label, 0 is smallest
-ending_bin = 11;                // end bin number
+ending_bin = 12;                // end bin number
 invert = true;
 
 bin_width = 22;
