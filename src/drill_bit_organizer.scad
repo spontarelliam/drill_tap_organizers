@@ -1,43 +1,42 @@
 //---------------------
 //   Drill bit organizer
 //   Adam Spontarelli
-//   11/2018
+//   11/2023
+//
+// Writing this has taught me to never use OpenSCAD again. No variables?!?
 //---------------------
-starting_bin = 0;     // changes the starting size label, 0 is smallest
-ending_bin = 15;                // end bin number
+
+
+starting_bin = 0;    // changes the starting size label, 0 is smallest
+ending_bin = 29;     // end bin number
 //units = "metric";  // "imperial" or "metric"
-units = "imperial";  // "imperial" or "metric"
-invert = false;           // true flips the labels
+units = "imperial";  // "imperial", "metric", "gauge", "letter"
+invert = false;      // true flips the labels
 
-bin_width = 16;
-starting_bin_width = 16;
+
 shortest_bin = 70;
-growth_rate = 0.027;
 printer_width = 175;
-
 drawer_width = 558;
 drawer_height= 40;
 
-l = 2;
 w = shortest_bin;
-h = 50;
-l2 = l-1;
-w2 = w-6;
-h2 = h-3;
 min_height = 20;
-max_height = drawer_height;
+max_height = drawer_height - 1;
 wall_thickness = 2;
 bottom_thickness = 4;
 xGR = 0.37; // x growth rate
-yGR = 1; // y growth rate
-
+yGR = 0.027; // y growth rate
+        
 nbins = ending_bin - starting_bin;
-organizer_width = nbins*starting_bin_width + nbins/2 * ((nbins-1)*xGR) - nbins*wall_thickness; 
+organizer_width = drawer_width - 2; // margin
+starting_bin_width = (organizer_width - nbins/2 * ((nbins-1)*xGR) + nbins*wall_thickness) / nbins ;
 
-echo("last bin width = ", w+((ending_bin)*w*2*growth_rate));
+echo("starting_bin_width width =", starting_bin_width);
+echo("last bin length = ", shortest_bin+((ending_bin)*shortest_bin*2*yGR));
 echo("organizer width =", organizer_width);
-echo( organizer_width > printer_width ? "ERROR: Organizer larger than printer bed" : "" );
+echo( organizer_width > printer_width ? "WARNING: Organizer larger than printer bed" : "" );
 echo( organizer_width > drawer_width ? "ERROR: Organizer larger than drawer width" : "" );
+
 
 for (i=[starting_bin:ending_bin-1])
 {
@@ -46,8 +45,8 @@ for (i=[starting_bin:ending_bin-1])
         difference()
         {
             
-            bin_length = w+(i*w*2*growth_rate);
-            //bin_height = i*yGR + min_height;
+            bin_length = shortest_bin+(i*shortest_bin*2*yGR);
+            //bin_height = i*yGR + min_height; // alternative approach
             bin_height = max_height;
             bin_width = starting_bin_width + i*xGR;
             
@@ -136,7 +135,7 @@ for (i=[starting_bin:ending_bin-1])
     }
     else if (units == "metric")
     {
-        labels=[ for (i = [1:0.5:20]) str(i) ];
+        labels=[ for (i = [1:0.5:13]) str(i) ];
         if (invert==true) {
 
             translate([-1+i*bin_width,-shortest_bin/2-8,-h/2])
@@ -151,13 +150,17 @@ for (i=[starting_bin:ending_bin-1])
         }
         else {
 
-            translate([-1+i*bin_width,-shortest_bin/2-8,-h/2])
-            cube([bin_width+2, 8,h]);
-
-            translate([bin_width/2 + i*bin_width, -shortest_bin/2-4, h/2 - 4])
+            //bin_height = i*yGR + min_height;
+            bin_height = max_height;
+            bin_width = starting_bin_width + i*xGR;
+            xpos = i*starting_bin_width + (i/2 * (i-1) * xGR) - wall_thickness*i;
+            
+            translate([xpos, -8, 0])
+            cube([bin_width, 8,bin_height]);
+            translate([bin_width/2 + xpos, -4, bin_height - 4])
             color("red")
             linear_extrude(height = 5) {
-                text(labels[i], size = 5, font = "Cantarell Extra Bold", halign = "center", valign = "center", $fn = 16);
+                text(labels[i], size = 4, font = "Cantarell Extra Bold", halign = "center", valign = "center", $fn = 16);
             }
 
         }
@@ -165,7 +168,6 @@ for (i=[starting_bin:ending_bin-1])
     
     else if (units == "gauge")
     {
-        tallest_bin = 50;
         labels=[ for (i = [1:1:60]) str(i) ];
         if (invert==true) {
 
@@ -181,13 +183,17 @@ for (i=[starting_bin:ending_bin-1])
         }
         else {
 
-            translate([-1+i*bin_width,-shortest_bin/2-8,-h/2])
-            cube([bin_width+2, 8,h]);
-
-            translate([bin_width/2 + i*bin_width, -shortest_bin/2-4, h/2 - 4])
+            //bin_height = i*yGR + min_height;
+            bin_height = max_height;
+            bin_width = starting_bin_width + i*xGR;
+            xpos = i*starting_bin_width + (i/2 * (i-1) * xGR) - wall_thickness*i;
+            
+            translate([xpos, -8, 0])
+            cube([bin_width, 8,bin_height]);
+            translate([bin_width/2 + xpos, -4, bin_height - 4])
             color("red")
             linear_extrude(height = 5) {
-                text(labels[i], size = 5, font = "Cantarell Extra Bold", halign = "center", valign = "center", $fn = 16);
+                text(labels[i], size = 4, font = "Cantarell Extra Bold", halign = "center", valign = "center", $fn = 16);
             }
 
         }
@@ -195,7 +201,7 @@ for (i=[starting_bin:ending_bin-1])
     
     else if (units == "letter")
     {
-        alphabet = ["A", "B", "C"];
+        alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
         labels=[ for (i = [1:1:26]) str(i) ];
         if (invert==true) {
 
