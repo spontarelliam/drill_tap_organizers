@@ -4,6 +4,8 @@
 //   11/2023
 //
 // Writing this has taught me to never use OpenSCAD again. No variables?!?
+// Why am I trying to do all this in one file if there aren't functions or
+// variables? Repeat code is unavoidable.
 //---------------------
 
 
@@ -26,6 +28,9 @@ wall_thickness = 2;
 bottom_thickness = 4;
 xGR = 0.37; // x growth rate
 yGR = 0.027; // y growth rate
+
+
+
         
 nbins = ending_bin - starting_bin;
 organizer_width = drawer_width - 2; // margin
