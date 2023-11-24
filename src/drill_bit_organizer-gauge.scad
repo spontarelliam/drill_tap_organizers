@@ -53,8 +53,7 @@ for (i=[starting_bin:ending_bin-1])
     difference()
     {
         difference()
-        {
-            
+        {  
             bin_length = shortest_bin+(i*shortest_bin*2*yGR);
             max_length = shortest_bin + ((nbins-1) * shortest_bin * 2 * yGR);
             //bin_height = i*yGR + min_height; // alternative approach
@@ -74,8 +73,6 @@ for (i=[starting_bin:ending_bin-1])
                             wall_thickness, 
                             bottom_thickness])
             cube ([bin_width - 2*wall_thickness, pocket_length, 100]);
-            
-                
         }
 
         // thumb slot
@@ -85,12 +82,9 @@ for (i=[starting_bin:ending_bin-1])
         translate([250,2/3 * shortest_bin, bottom_thickness + 12+50])
         rotate([-3, 90, 0])
         cube([100,22,800], center=true);
-        
-        // Thinking about adding gauge holes to front, but doesn't seem practical
-        // you could fill them with supports then drill them out with the 
-        // corresponding drill.
+
         // polynomial approximation close enough for my taste
-        drill_radius = 25.4 / 2 * (0.000149 * pow(i,2) + 0.00363*i + .2335);
+        drill_radius = 25.4 / 2 * (0.000149 * pow(i,2) + 0.00363*i + .02335);
         bin_length = shortest_bin+(i*shortest_bin*2*yGR);
         translate([bin_width/2 + xpos, bin_length + 5 + drill_radius,30])
         cylinder(h=20, r= drill_radius, center=true, $fn=100);
@@ -105,13 +99,11 @@ for (i=[starting_bin:ending_bin-1])
     rotate([-1, 90, 0])
     translate([-5, 15, organizer_width/2+1])
     cylinder (h = organizer_width, r=5, center = true, $fn=10);
-    //----------------------------------------
-           
+    //----------------------------------------     
 }
 
-
-translate([90,150, 40 - 4])
+translate([80,85, 40 - 4])
 color("red")
 linear_extrude(height = 5) {
-    text("Letter Drills", size = 16, font = "Cantarell Extra Bold", halign = "center", valign = "center", $fn = 16);
+    text("Gauge Drills", size = 16, font = "Cantarell Extra Bold", halign = "center", valign = "center", $fn = 16);
 }
