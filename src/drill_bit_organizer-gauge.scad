@@ -84,10 +84,10 @@ for (i=[starting_bin:ending_bin-1])
         cube([100,22,800], center=true);
 
         // polynomial approximation close enough for my taste
-        drill_radius = 25.4 / 2 * (0.000149 * pow(i,2) + 0.00363*i + .02335);
-        bin_length = shortest_bin+(i*shortest_bin*2*yGR);
-        translate([bin_width/2 + xpos, bin_length + 5 + drill_radius,30])
-        cylinder(h=20, r= drill_radius, center=true, $fn=100);
+        //drill_radius = 25.4 / 2 * (0.000149 * pow(i,2) + 0.00363*i + .02335);
+        //bin_length = shortest_bin+(i*shortest_bin*2*yGR);
+        //translate([bin_width/2 + xpos, bin_length + 5 + drill_radius,30])
+        //cylinder(h=20, r= drill_radius, center=true, $fn=100);
     }
 
     //--------- lower ribs to help with pickup ---------

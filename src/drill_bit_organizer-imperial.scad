@@ -42,8 +42,8 @@ echo( organizer_width > drawer_width ? "ERROR: Organizer larger than drawer widt
 
 for (i=[starting_bin:ending_bin-1])
 {
-    //bin_height = i*yGR + min_height;
-    bin_height = max_height;
+    //bin_height = i*yGR + min_height; //material saving
+    bin_height = max_height; // allows filament color change
     bin_width = starting_bin_width + i*xGR;
     xpos = i*starting_bin_width + (i/2 * (i-1) * xGR) - wall_thickness*i;
     
